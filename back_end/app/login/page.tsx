@@ -7,12 +7,13 @@ import { getAnalytics } from "firebase/analytics";
 
 
     const firebaseConfig = {
-      apiKey: "AIzaSyCAsJ4r-EPM3eTKduDOnGFJlj1vq6378EU",
-      authDomain: "auth-demo-5219c.firebaseapp.com",
-      projectId: "auth-demo-5219c",
-      storageBucket: "auth-demo-5219c.firebasestorage.app",
-      messagingSenderId: "275727416717",
-      appId: "1:275727416717:web:4a5b61f47c60683bd991c4"
+      apiKey: "AIzaSyD_ark35n8AD3GUhvoORXT62Wp8BNG1qoc",
+      authDomain: "blackmarket-2c3b4.firebaseapp.com",
+      projectId: "blackmarket-2c3b4",
+      storageBucket: "blackmarket-2c3b4.firebasestorage.app",
+      messagingSenderId: "114831821794",
+      appId: "1:114831821794:web:e33af53ce49c86586087bb",
+      measurementId: "G-LYMG183JBS"
     };
     // Initialize Firebase
      const app = initializeApp(firebaseConfig);
