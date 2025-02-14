@@ -29,6 +29,13 @@ export default function RootLayout({
       >
         {children}
       </body>
+      <footer>
+        <div className="w-7/12 mx-auto pt-40 flex flex-col justify-center">
+          <p>
+            &copy; {new Date().getFullYear()} BlackMarket. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </html>
   );
 }
