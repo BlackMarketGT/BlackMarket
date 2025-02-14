@@ -37,6 +37,8 @@ export default function Login() {
     fullName: "",
   });
 
+  const [error, setError] = useState<string | null>(null);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLoginData((prev) => ({
@@ -53,11 +55,14 @@ export default function Login() {
           // Signed up
           const user = userCredential.user;
           window.location.href = '/onboarding';
+          console.log(user);
           // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+          setError(error.message);
         });
     }
     else {
@@ -65,8 +70,11 @@ export default function Login() {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          window.location.href = '/dashboard';
+          window.location.href = '';//change redirect later
         })
+        .catch((error) => {
+          setError(error.message);
+        });
     }
 
     console.log(loginData);
@@ -81,6 +89,12 @@ export default function Login() {
         <h2 className="text-center text-3xl font-bold">
           {loginData.isNewUser ? "Create Account" : "Sign In"}
         </h2>
+
+        {error && (
+          <div className="text-red-500 text-center">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           {loginData.isNewUser && (

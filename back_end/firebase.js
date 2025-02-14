@@ -17,6 +17,11 @@ const firebaseConfig = {
     measurementId: "G-LYMG183JBS"
 };
 // Initialize Firebase
- const app = initializeApp(firebaseConfig);
- const auth = getAuth(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const analytics = app.name && typeofwindow !== "undefined" ? getAnalytics(app): null;
+const db = getFirestore(app);
+
 }, [])
+
+export {app, auth, analytics, db};
