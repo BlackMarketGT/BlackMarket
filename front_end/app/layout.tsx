@@ -23,19 +23,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="light">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-      </body>
       <footer>
         <div className="w-7/12 mx-auto pt-40 flex flex-col justify-center text-center">
           <p>
             &copy; {new Date().getFullYear()} BlackMarket. All rights reserved.
           </p>
+          
         </div>
       </footer>
+      </body>
     </html>
   );
 }

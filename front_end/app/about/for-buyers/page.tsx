@@ -3,7 +3,7 @@ import { NavigationBar } from "../../components/NavigationBar";
 export default function Home() {
   return (
     <>
-    <div className="fixed top-0 w-full flex justify-center items-center pt-4 bg-white z-10">
+    <div className="fixed top-0 w-full flex justify-center items-center pt-4 z-10">
       <NavigationBar />
     </div>
     <div className="w-7/12 mx-auto pt-40 flex flex-col justify-center">
