@@ -55,7 +55,7 @@ body {
   align-items: flex-start;
   text-align: left;
   padding: 40px;
-  margin-left: 200px; /* Move left by decreasing the margin */
+  margin-left: 200px; 
   width: calc(100% - 200px);
 }
 
