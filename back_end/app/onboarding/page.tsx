@@ -5,7 +5,7 @@ import { getAuth } from "firebase/auth";
 import { ref, set } from "firebase/database";
 import { db } from "@/firebase";
 
-function writeUserData(userId: string, fullName: string, email: string) {
+function writeUserData(userId: string, fullName: string, email: string, birthday: string, username: string) {
   const cleanName = fullName.trim();
   let firstName = "";
   let lastName = "";
@@ -24,6 +24,8 @@ function writeUserData(userId: string, fullName: string, email: string) {
     lastName,
     fullName,
     email,
+    birthday,
+    username,
   });
 
   console.log("User data added to database");
@@ -52,7 +54,7 @@ export default function OnboardingPage() {
     }
 
     // write user data to Realtime Database
-    writeUserData(currentUser.uid, formData.fullName, currentUser.email || "");
+    writeUserData(currentUser.uid, formData.fullName, currentUser.email || "", formData.birthday, formData.username);
 
     // go to dashboard (not set up yet)
     router.push("/dashboard");
