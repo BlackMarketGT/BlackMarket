@@ -1,3 +1,5 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -11,6 +13,29 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+
+{/* function to adjust image based on system theme */}
+const getSystemTheme = (): 'light' | 'dark' => {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+};
+
+const adjustImage = () => {
+  const [theme, setTheme] = React.useState<'light' | 'dark'>(getSystemTheme());
+
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = () => setTheme(getSystemTheme());
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  if (theme === "dark") {
+    return "/bktmrktlogo_white.png";
+  }
+  return "/bktmrktlogo_blk.png";
+};
+
 
 const about: { title: string; description: string; href: string }[] = [
   {
@@ -37,7 +62,7 @@ export function NavigationBar() {
     <NavigationMenu>
       <NavigationMenuList className="space-x-10">
         <NavigationMenuItem className="">
-          <Image src="/bktmrktlogo_blk.png" alt="logo" width={25} height={25} />
+          <Image src={adjustImage()} alt="logo" width={25} height={25} />
         </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="/">
