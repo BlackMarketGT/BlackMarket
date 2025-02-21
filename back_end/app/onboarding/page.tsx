@@ -1,48 +1,32 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { getAnalytics, setUserProperties } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
-// Add firebase database
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, onValue, off } from "firebase/database";
+import { ref, set } from "firebase/database";
+import { db } from "@/firebase";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyD_ark35n8AD3GUhvoORXT62Wp8BNG1qoc",
-    authDomain: "blackmarket-2c3b4.firebaseapp.com",
-    projectId: "blackmarket-2c3b4",
-    storageBucket: "blackmarket-2c3b4.firebasestorage.app",
-    messagingSenderId: "114831821794",
-    appId: "1:114831821794:web:e33af53ce49c86586087bb",
-    measurementId: "G-LYMG183JBS"
-};
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const user = getAuth(app);
-// Initialize Firebase
-
-function writeUserData(userId: any, name: any, email: any) {
-  //Make sure our Data is clean
-  const cleanName = name.trim();
+function writeUserData(userId: string, fullName: string, email: string) {
+  const cleanName = fullName.trim();
   let firstName = "";
   let lastName = "";
+
   if (cleanName.includes(" ")) {
     const nameParts = cleanName.split(" ");
     firstName = nameParts[0];
-    lastName = nameParts[1];
+    lastName = nameParts.slice(1).join(" ");
   } else {
     firstName = cleanName;
     lastName = "";
   }
 
   set(ref(db, "users/" + userId), {
-    firstName: firstName,
-    lastName: lastName,
-    fullName: name,
-    email: email,
+    firstName,
+    lastName,
+    fullName,
+    email,
   });
+
   console.log("User data added to database");
-  window.location.href = "/dashboard";
 }
 
 export default function OnboardingPage() {
@@ -52,17 +36,26 @@ export default function OnboardingPage() {
     username: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const router = useRouter();
+
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
+
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    // Add user data to database
-    writeUserData(
-      user.currentUser?.uid,
-      formData.fullName,
-      user.currentUser?.email
-    );
-    // Navigate to next page after submission
-    // window.location.href = '/dashboard';
+
+    // confirm user is logged in
+    if (!currentUser) {
+      console.error("Could not find user. Are you sure the user is signed in?");
+      return;
+    }
+
+    // write user data to Realtime Database
+    writeUserData(currentUser.uid, formData.fullName, currentUser.email || "");
+
+    // go to dashboard (not set up yet)
+    router.push("/dashboard");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

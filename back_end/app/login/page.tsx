@@ -1,25 +1,13 @@
 "use client";
 import { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { Console } from "console";
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyD_ark35n8AD3GUhvoORXT62Wp8BNG1qoc",
-      authDomain: "blackmarket-2c3b4.firebaseapp.com",
-      projectId: "blackmarket-2c3b4",
-      storageBucket: "blackmarket-2c3b4.firebasestorage.app",
-      messagingSenderId: "114831821794",
-      appId: "1:114831821794:web:e33af53ce49c86586087bb",
-      measurementId: "G-LYMG183JBS"
-    };
-    // Initialize Firebase
-     const app = initializeApp(firebaseConfig);
-     const auth = getAuth(app);
-     const analytics = getAnalytics(app);
-
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
+import { get, ref, set } from "firebase/database";
+import { useRouter } from "next/navigation"; // <-- Use 'next/navigation'
+import { auth, db, provider } from "@/firebase";
 
 interface LoginState {
   email: string;
@@ -28,8 +16,34 @@ interface LoginState {
   fullName: string;
 }
 
-
 export default function Login() {
+  const router = useRouter();
+
+  const signInWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      // check if user already exists
+      const userRef = ref(db, `users/${user.uid}`);
+      const snapshot = await get(userRef);
+
+      if (!snapshot.exists()) {
+        // new user, store data
+        await set(userRef, {
+          fullName: user.displayName,
+          email: user.email,
+        });
+        router.push("/onboarding");
+      } else {
+        // existing user, nothing to do
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      console.error("Error with Google Sign-In:", error);
+    }
+  };
+
   const [loginData, setLoginData] = useState<LoginState>({
     email: "",
     password: "",
@@ -53,31 +67,20 @@ export default function Login() {
       createUserWithEmailAndPassword(auth, loginData.email, loginData.password)
         .then((userCredential) => {
           // Signed up
-          const user = userCredential.user;
-          window.location.href = '/onboarding';
-          console.log(user);
-          // ...
+          router.push("/onboarding");
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode, errorMessage);
           setError(error.message);
         });
-    }
-    else {
+    } else {
       signInWithEmailAndPassword(auth, loginData.email, loginData.password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          window.location.href = '';//change redirect later
+        .then(() => {
+          router.push("/dashboard");
         })
         .catch((error) => {
           setError(error.message);
         });
     }
-
-    console.log(loginData);
   };
 
   return (
@@ -161,6 +164,14 @@ export default function Login() {
               {loginData.isNewUser ? "Sign Up" : "Sign In"}
             </button>
           </div>
+
+          <button
+            type="button"
+            onClick={signInWithGoogle}
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700"
+          >
+            Sign in with Google
+          </button>
         </form>
 
         <div className="text-center">
