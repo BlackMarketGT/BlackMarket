@@ -15,10 +15,6 @@ export default function ThemeProvider() {
     document.documentElement.classList.remove('light', 'dark');
     document.documentElement.classList.add(theme);
 
-    const timeout = setTimeout(() => {
-      document.body.classList.add('loaded');
-    }, 50); 
-
     // Listen for system theme changes
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => setTheme(getSystemTheme());
