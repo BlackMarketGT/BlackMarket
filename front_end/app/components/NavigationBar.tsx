@@ -66,12 +66,10 @@ export function NavigationBar() {
           <Image src={adjustImage()} alt="logo" width={25} height={25} />
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href="/">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Home
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
+        <NavigationMenuLink asChild>
+          <Link href="/" className={navigationMenuTriggerStyle()}>Home</Link>
+        </NavigationMenuLink>
+      </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger>About</NavigationMenuTrigger>
           <NavigationMenuContent>
