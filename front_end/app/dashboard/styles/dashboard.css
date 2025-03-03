@@ -1,178 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset & Global Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
 }
 
 body {
-  min-height: 100vh;
-  background-color: #121212;
-  color: #ffffff;
-  overflow-x: hidden;
+  @apply bg-[#1e1e1e] text-[#d1d1d1] h-screen w-screen flex overflow-hidden;
 }
 
+/* Sidebar */
 .sidebar {
-  width: 250px;
-  height: 100vh;
-  background-color: #1a1a1a;
-  color: white;
-  padding: 20px;
-  position: fixed;
-  left: 0;
-  top: 0;
+  @apply w-[250px] h-screen bg-[#121212] text-white p-5 fixed left-0 top-0 flex flex-col overflow-y-auto;
 }
 
 .sidebar h2 {
-  font-size: 22px;
-  margin-bottom: 20px;
-  color: #a06cd5;
+  @apply text-2xl text-white font-bold mb-5;
 }
 
 .sidebar ul {
-  list-style: none;
-  padding: 0;
+  @apply list-none p-0;
 }
 
 .sidebar ul li {
-  margin: 15px 0;
+  @apply my-4;
 }
 
 .sidebar ul li a {
-  text-decoration: none;
-  color: #d1d1d1;
-  font-size: 16px;
-  transition: color 0.3s;
+  @apply text-[#d1d1d1] text-base transition-colors duration-300 hover:text-white;
 }
 
-.sidebar ul li a:hover {
-  color: #a06cd5;
+/* Dashboard Layout */
+.dashboard-container {
+  @apply flex-grow h-screen flex flex-col items-center p-6 overflow-y-auto ml-[250px] w-[calc(100%-250px)];
 }
 
+/* Dashboard Header */
+.dashboard-header {
+  @apply w-full bg-[#121212] text-white p-4 text-3xl font-bold text-center border-b-2 border-white;
+}
+
+/* Dashboard Content */
 .dashboard-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  padding: 40px;
-  margin-left: 200px; 
-  width: calc(100% - 200px);
+  @apply w-full flex flex-col items-center text-center gap-6;
 }
 
-.dashboard-overview {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  max-width: 1000px;
-  gap: 20px;
-}
-
-
-
-
+/* Stats Cards */
 .stats-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: nowrap;
-  width: 100%;
-  max-width: 1000px;
+  @apply flex justify-evenly w-full flex-wrap max-w-[1200px] gap-6;
 }
-
 
 .stats-card {
-  background: #1e1e1e;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(160, 108, 213, 0.3);
-  text-align: center;
-  width: 300px;
-  border: 1px solid #a06cd5;
+  @apply bg-[#2a2a2a] p-6 rounded-lg shadow-lg text-center w-[30%] min-w-[250px] border border-white;
 }
 
 .stats-card h3 {
-  font-size: 18px;
-  color: #ffffff;
+  @apply text-lg font-semibold text-white;
 }
 
 .stats-card .value {
-  font-size: 24px;
-  font-weight: bold;
-  color: #a06cd5;
+  @apply text-2xl font-bold text-white;
 }
 
 .stats-card .change {
-  font-size: 16px;
-  font-weight: bold;
-  color: #66ff66;
+  @apply text-sm font-bold text-green-400;
 }
 
+/* Progress Bars */
 .progress-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 800px;
-  margin-top: 30px;
-  gap: 20px;
+  @apply flex flex-col items-center w-full max-w-[800px] mt-4 gap-4;
 }
 
 .progress-bar-container {
-  width: 100%;
-}
-
-.progress-bar-title {
-  display: flex;
-  justify-content: space-between;
-  font-size: 16px;
-  color: #d1d1d1;
-  margin-bottom: 5px;
+  @apply w-full;
 }
 
 .progress-bar {
-  height: 12px;
-  background: #2c2c2c;
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1px solid #a06cd5;
+  @apply h-3 bg-[#333333] rounded-lg overflow-hidden border border-white;
 }
 
 .progress-bar-fill {
-  height: 100%;
-  background: #a06cd5;
-  transition: width 0.5s ease-in-out;
+  @apply h-full bg-white transition-all duration-500;
 }
 
+/* Chart Section */
 .chart-section {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-top: 40px;
+  @apply flex justify-center w-full mt-8;
 }
 
 .chart-container {
-  background: #1e1e1e;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(160, 108, 213, 0.3);
-  width: 90%;
-  max-width: 800px;
-  text-align: center;
-  border: 1px solid #a06cd5;
+  @apply bg-[#2a2a2a] p-6 rounded-lg shadow-lg w-[90%] max-w-[800px] text-center border border-white;
 }
 
-h2, h3, p, span {
-  color: #ffffff !important;
-}
-
+/* Tooltip */
 .recharts-tooltip-wrapper {
-  background: rgba(20, 20, 20, 0.9);
-  padding: 8px;
-  border: 2px solid #a06cd5;
-  border-radius: 6px;
-  color: white;
-  font-size: 14px;
-  text-align: left;
-  box-shadow: 0px 4px 10px rgba(160, 108, 213, 0.3);
+  @apply bg-[#141414]/90 p-3 border-2 border-white rounded-lg text-white text-sm text-left shadow-md;
+}
+
+/* Responsive Fixes */
+@media (max-width: 1024px) {
+  .stats-container {
+    @apply flex-col items-center;
+  }
+
+  .stats-card {
+    @apply w-[80%];
+  }
+
+  .dashboard-container {
+    @apply w-full ml-0;
+  }
+
+  .sidebar {
+    @apply w-[250px] h-screen fixed left-0 top-0 z-10;
+  }
+}
+
+/* Dashboard Navigation Buttons (ShadCN) */
+.dashboard-links {
+  @apply mt-6 flex gap-4;
+}
+
+.shadcn-button {
+  @apply bg-white text-black px-6 py-3 font-semibold rounded-lg hover:bg-[#d1d1d1] transition-all shadow-lg;
 }

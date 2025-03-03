@@ -1,41 +1,73 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DashboardLayout from "./layout";
 import "./styles/dashboard.css";
+import Header from "./components/Header";
 import StatsCard from "./components/StatsCard";
-import SalesChart from "./components/SalesChart";
 import ProgressBar from "./components/ProgressBar";
+import Charts from "./components/Charts";
+
+
+interface DashboardData {
+  transactions: { value: string; change: string };
+  totalUsers: { value: string; change: string };
+  ordersPlaced: { value: string; change: string };
+  quarterSalesGoal: { progress: number; goal: number };
+  customerGrowth: { progress: number; goal: number };
+}
 
 const DashboardPage: React.FC = () => {
+  const [data, setData] = useState<DashboardData | null>(null);
 
-    return(
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/dashboard-data"); // API route for backend data
+        const json = await res.json();
+        setData(json);
+      } catch (error) {
+        console.error("Failed to fetch dashboard data:", error);
+      }
+    };
 
-        <DashboardLayout>
-            <div className = "dashboard-content">
-                <div className = "dashboard-overview">
-                    <div className = "overview-text">
-                        <h2>Dashboard Overview</h2>
-                        <p>This is where you will see important metrics and analytics.</p>
-                        <div className = "stats-container">
-                            <StatsCard title = "Transactions" value = "45,300" change = "+2.87%"/>
-                            <StatsCard title = "Total Users" value = "89,500" change = "+0.73%"/>
-                            <StatsCard title = "Orders Placed" value = "200,543" change = "+1.90%"/>
+    fetchData();
+  }, []);
 
-                        </div>
+  if (!data) return <p className="text-white text-center mt-10">Loading...</p>;
 
-                        <div className = "progress-container">
-                            <ProgressBar title = "Quarter Sales Goal" progress = {70} goal = {100}/>
-                            <ProgressBar title = "Customer Growth" progress = {55} goal = {100}/>
-                        </div>
-                    </div>
-                    <div className = "chart-section">
-                    <SalesChart/>
-                    </div>
-                </div>
+  return (
+    <DashboardLayout>
+      <div className="dashboard-content">
+        <Header />
+        <div className="dashboard-overview">
+          <div className="overview-text">
+            <p>This is where you will see important metrics and analytics.</p>
+
+            {/* Stats Overview */}
+            <div className="stats-container">
+              <StatsCard title="Transactions" value={data.transactions.value} change={data.transactions.change} />
+              <StatsCard title="Total Users" value={data.totalUsers.value} change={data.totalUsers.change} />
+              <StatsCard title="Orders Placed" value={data.ordersPlaced.value} change={data.ordersPlaced.change} />
             </div>
-        </DashboardLayout>
-    );
+
+            {/* Progress Bars */}
+            <div className="progress-container">
+              <ProgressBar title="Quarter Sales Goal" progress={data.quarterSalesGoal.progress} goal={data.quarterSalesGoal.goal} />
+              <ProgressBar title="Customer Growth" progress={data.customerGrowth.progress} goal={data.customerGrowth.goal} />
+            </div>
+            
+          </div>
+
+          {/* Charts Section */}
+          <div className="chart-section">
+            <Charts />
+          </div>
+
+        </div>
+      </div>
+    </DashboardLayout>
+  );
 };
 
 export default DashboardPage;

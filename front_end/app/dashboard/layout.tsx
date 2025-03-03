@@ -10,14 +10,17 @@ interface LayoutProps{
 const DashboardLayout: React.FC<LayoutProps> = ({children}) => {
 
     return (
+        
         <div className = "dashboard-container">
-            {/* Include the top navigation header*/}
-            <Header/>
+            
+            
             <div className = "dashboard-content">
-                {/* Sidebar for navigation */}
+                
                 <Sidebar />
-                {/* Main content area */}
-                <main className = "main-content">{children}</main>
+                
+                <main className = "main-content">
+                    
+                    {children}</main>
             </div>
         </div>
     );
