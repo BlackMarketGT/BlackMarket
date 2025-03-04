@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset & Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  @apply bg-[#1e1e1e] text-[#d1d1d1] h-screen w-screen flex overflow-hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  @apply w-[250px] h-screen bg-[#121212] text-white p-5 fixed left-0 top-0 flex flex-col overflow-y-auto;
+}
+
+.sidebar h2 {
+  @apply text-2xl text-white font-bold mb-5;
+}
+
+.sidebar ul {
+  @apply list-none p-0;
+}
+
+.sidebar ul li {
+  @apply my-4;
+}
+
+.sidebar ul li a {
+  @apply text-[#d1d1d1] text-base transition-colors duration-300 hover:text-white;
+}
+
+/* Dashboard Layout */
+.dashboard-container {
+  @apply flex-grow h-screen flex flex-col items-center p-6 overflow-y-auto ml-[250px] w-[calc(100%-250px)];
+}
+
+/* Dashboard Header */
+.dashboard-header {
+  @apply w-full bg-[#121212] text-white p-4 text-3xl font-bold text-center border-b-2 border-white;
+}
+
+/* Dashboard Content */
+.dashboard-content {
+  @apply w-full flex flex-col items-center text-center gap-6;
+}
+
+/* Stats Cards */
+.stats-container {
+  @apply flex justify-evenly w-full flex-wrap max-w-[1200px] gap-6;
+}
+
+.stats-card {
+  @apply bg-[#2a2a2a] p-6 rounded-lg shadow-lg text-center w-[30%] min-w-[250px] border border-white;
+}
+
+.stats-card h3 {
+  @apply text-lg font-semibold text-white;
+}
+
+.stats-card .value {
+  @apply text-2xl font-bold text-white;
+}
+
+.stats-card .change {
+  @apply text-sm font-bold text-green-400;
+}
+
+/* Progress Bars */
+.progress-container {
+  @apply flex flex-col items-center w-full max-w-[800px] mt-4 gap-4;
+}
+
+.progress-bar-container {
+  @apply w-full;
+}
+
+.progress-bar {
+  @apply h-3 bg-[#333333] rounded-lg overflow-hidden border border-white;
+}
+
+.progress-bar-fill {
+  @apply h-full bg-white transition-all duration-500;
+}
+
+/* Chart Section */
+.chart-section {
+  @apply flex justify-center w-full mt-8;
+}
+
+.chart-container {
+  @apply bg-[#2a2a2a] p-6 rounded-lg shadow-lg w-[90%] max-w-[800px] text-center border border-white;
+}
+
+/* Tooltip */
+.recharts-tooltip-wrapper {
+  @apply bg-[#141414]/90 p-3 border-2 border-white rounded-lg text-white text-sm text-left shadow-md;
+}
+
+/* Responsive Fixes */
+@media (max-width: 1024px) {
+  .stats-container {
+    @apply flex-col items-center;
+  }
+
+  .stats-card {
+    @apply w-[80%];
+  }
+
+  .dashboard-container {
+    @apply w-full ml-0;
+  }
+
+  .sidebar {
+    @apply w-[250px] h-screen fixed left-0 top-0 z-10;
+  }
+}
+
+/* Dashboard Navigation Buttons (ShadCN) */
+.dashboard-links {
+  @apply mt-6 flex gap-4;
+}
+
+.shadcn-button {
+  @apply bg-white text-black px-6 py-3 font-semibold rounded-lg hover:bg-[#d1d1d1] transition-all shadow-lg;
+}
