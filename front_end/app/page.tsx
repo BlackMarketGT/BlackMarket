@@ -19,7 +19,7 @@ export default function Home() {
           <Link href="/details">
             <Button>Learn More</Button>
           </Link>
-          <Link href="/docs">
+          <Link href="/login?newuser=true">
             <Button>Get Started &rarr;</Button>
           </Link>
           

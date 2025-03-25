@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import ThemeProvider from "./components/ThemeProvider";
+import ThemeProvider from "./components/ThemeProvider"
+import { Toaster } from "@/components/ui/toaster";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +31,7 @@ export default function RootLayout({
       >
         <ThemeProvider />
         {children}
+        <Toaster />
       <footer>
         <div className="w-7/12 mx-auto pt-40 flex flex-col justify-center text-center">
           <p>

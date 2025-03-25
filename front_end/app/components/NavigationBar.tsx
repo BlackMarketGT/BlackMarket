@@ -13,6 +13,9 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase/config";
+import { Button } from "@/components/ui/button";
 
 {/* function to adjust image based on system theme */}
 const getSystemTheme = (): 'light' | 'dark' => {
@@ -58,7 +61,10 @@ const about: { title: string; description: string; href: string }[] = [
   },
 ];
 
+
 export function NavigationBar() {
+  const userSession = sessionStorage.getItem('user');
+  const [user] = useAuthState(auth);
   return (
     <NavigationMenu>
       <NavigationMenuList className="space-x-10">
@@ -86,13 +92,37 @@ export function NavigationBar() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem>
+        {user && userSession ? (
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>
+              Account
+            </NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid w-[400px] gap-3 p-4">
+                <ListItem title="My Account" href="/account">
+                  View and edit your account information
+                </ListItem>
+                <ListItem title="Dashboard" href="/dashboard">
+                  View Your Dashboard
+                </ListItem>
+                <ListItem title="Sign Out" href="/login" className="text-red-500" onClick={() => {
+                  sessionStorage.removeItem('user');
+                  auth.signOut();
+                }}>
+                  Sign Out of BlackMarket
+                </ListItem>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        ):(
+          <NavigationMenuItem>
           <Link href="/login" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Login
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
+        )}
       </NavigationMenuList>
     </NavigationMenu>
   );
