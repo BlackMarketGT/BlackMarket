@@ -1,0 +1,95 @@
+{
+    "recommended": [
+      {
+        "id": "1",
+        "name": "Black Cozy Hoodie",
+        "description": "A comfortable and casual hoodie, perfect for everyday wear.",
+        "price": 25.00,
+        "category": "Men",
+        "image": "/images/black_hoodie.jpeg"
+      },
+      {
+        "id": "5",
+        "name": "Stylish Sun Hat",
+        "description": "Keep cool and stylish this summer with our trendy sun hat.",
+        "price": 30.00,
+        "category": "Women",
+        "image": "/images/black_hoodie.jpeg"
+      }
+    ],
+    "trending": [
+      {
+        "id": "2",
+        "name": "Leather Jacket",
+        "description": "High-quality leather jacket for a sleek look.",
+        "price": 120.00,
+        "category": "Men",
+        "image": "/images/black_hoodie.jpeg"
+      },
+      {
+        "id": "4",
+        "name": "Elegant Necklace",
+        "description": "An elegant necklace to complement any outfit.",
+        "price": 45.00,
+        "category": "Accessories",
+        "image": "/images/black_hoodie.jpeg"
+      },
+      {
+        "id": "1",
+        "name": "Black Cozy Hoodie",
+        "description": "A comfortable and casual hoodie, perfect for everyday wear.",
+        "price": 25.00,
+        "category": "Men",
+        "image": "/images/black_hoodie.jpeg"
+      }
+    ],
+    "men": [
+      {
+        "id": "1",
+        "name": "Casual T-Shirt",
+        "description": "A comfortable and casual t-shirt, perfect for everyday wear.",
+        "price": 25.00,
+        "image": "/images/black_hoodie.jpeg"
+      },
+      {
+        "id": "2",
+        "name": "Leather Jacket",
+        "description": "High-quality leather jacket for a sleek look.",
+        "price": 120.00,
+        "image": "/images/black_hoodie.jpeg"
+      }
+    ],
+    "women": [
+      {
+        "id": "3",
+        "name": "Summer Dress",
+        "description": "A light and airy dress perfect for summer days.",
+        "price": 50.00,
+        "image": "/images/black_hoodie.jpeg"
+      },
+      {
+        "id": "5",
+        "name": "Stylish Sun Hat",
+        "description": "Keep cool and stylish this summer with our trendy sun hat.",
+        "price": 30.00,
+        "image": "/images/black_hoodie.jpeg"
+      }
+    ],
+    "accessories": [
+      {
+        "id": "4",
+        "name": "Elegant Necklace",
+        "description": "An elegant necklace to complement any outfit.",
+        "price": 45.00,
+        "image": "/images/black_hoodie.jpeg"
+      },
+      {
+        "id": "6",
+        "name": "Leather Boots",
+        "description": "Durable and stylish leather boots.",
+        "price": 95.00,
+        "image": "/images/black_hoodie.jpeg"
+      }
+    ]
+  }
+  
