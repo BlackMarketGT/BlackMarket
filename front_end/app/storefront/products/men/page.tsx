@@ -21,7 +21,7 @@ type productsByCategory = {
     accessories: product[];
 }
 
-export default function Women() {
+export default function Men() {
     const [products, setProducts] = useState<productsByCategory | null>(null);
 
     useEffect(() => {
