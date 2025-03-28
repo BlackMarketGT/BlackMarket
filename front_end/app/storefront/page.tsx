@@ -36,7 +36,7 @@ export default function Storefront() {
 
     return (
         <div className="m-10 justify-center items-center">
-            <div className="flex justify-center items-center text-5xl font-bold p-8">Greetings Guest, Let's dress to impress.</div>
+            <div className="flex items-center text-5xl font-bold pt-8 pl-8">Greetings Guest, Let's dress to impress.</div>
             <div className="flex w-full justify-center items-center">
                 <CarouselWide / >
             </div>

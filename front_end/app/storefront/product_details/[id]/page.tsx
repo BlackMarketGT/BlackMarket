@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { Button } from '@/components/ui/button';
 
 type Product = {
     id: number;
@@ -39,12 +40,22 @@ export default function ProductDetails() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center p-8">
-            <Image src={product.image} alt="product" className="rounded-md" width={500} height={500}/>
+        <div className="flex items-center justify-center p-8">
+            <Image 
+                src={product.image}
+                alt="product"
+                className="items-center justify-center rounded-md m-8" 
+                width={500}
+                height={500}
+            />
             <div>
-                <div>{product.name}</div>
-                <div>${product.price}</div>
+                <div className="">
+                    <div className=" text-5xl font-bold p-4 ">{product.name}</div>
+                    <div className="text-2xl font-bold p-4">${product.price}</div>
+                    <Button className="m-4">Add to cart &rarr;</Button>
+                </div>
             </div>
+
         </div>
     );
 }
