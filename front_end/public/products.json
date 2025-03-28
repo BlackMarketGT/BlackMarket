@@ -15,6 +15,13 @@
         "price": 30.00,
         "category": "Women",
         "image": "/images/black_hoodie.jpeg"
+      },
+      {
+        "id": "7",
+        "name": "Baggy Cargo Pants",
+        "description": "High-quality leather jacket for a sleek look.",
+        "price": 40.00,
+        "image": "/images/cargopants.jpg"
       }
     ],
     "trending": [
@@ -53,6 +60,41 @@
       },
       {
         "id": "2",
+        "name": "Leather Jacket",
+        "description": "High-quality leather jacket for a sleek look.",
+        "price": 120.00,
+        "image": "/images/black_hoodie.jpeg"
+      },
+      {
+        "id": "7",
+        "name": "Baggy Cargo Pants",
+        "description": "High-quality leather jacket for a sleek look.",
+        "price": 40.00,
+        "image": "/images/cargopants.jpg"
+      },
+      {
+        "id": "8",
+        "name": "Leather Jacket",
+        "description": "High-quality leather jacket for a sleek look.",
+        "price": 120.00,
+        "image": "/images/black_hoodie.jpeg"
+      },
+      {
+        "id": "9",
+        "name": "Leather Jacket",
+        "description": "High-quality leather jacket for a sleek look.",
+        "price": 120.00,
+        "image": "/images/black_hoodie.jpeg"
+      },
+      {
+        "id": "10",
+        "name": "Leather Jacket",
+        "description": "High-quality leather jacket for a sleek look.",
+        "price": 120.00,
+        "image": "/images/black_hoodie.jpeg"
+      },
+      {
+        "id": "11",
         "name": "Leather Jacket",
         "description": "High-quality leather jacket for a sleek look.",
         "price": 120.00,
