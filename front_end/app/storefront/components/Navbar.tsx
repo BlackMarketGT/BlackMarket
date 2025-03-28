@@ -5,6 +5,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import {
   NavigationMenu,
@@ -43,7 +44,7 @@ const adjustImage = () => {
 const components: { title: string; href: string;}[] = [
   {
     title: "All Products",
-    href: "/docs/primitives/alert-dialog",
+    href: "/storefront/products/",
   },
   {
     title: "Tops",
@@ -60,11 +61,14 @@ const components: { title: string; href: string;}[] = [
 ]
 
 export default function Navbar() {
+
   return (
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem className="mr-6">
-          <Image src={adjustImage()} alt="logo" width={25} height={25} />
+          <Link href="/storefront">
+            <Image src={adjustImage()} alt="logo" width={25} height={25} />
+          </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger>MEN</NavigationMenuTrigger>
@@ -74,7 +78,7 @@ export default function Navbar() {
                 <ListItem
                   key={component.title}
                   title={component.title}
-                  href={component.href}
+                  href={`${component.href}/men`}
                 >
                 </ListItem>
               ))}
@@ -89,7 +93,7 @@ export default function Navbar() {
                 <ListItem
                   key={component.title}
                   title={component.title}
-                  href={component.href}
+                  href={`${component.href}/women`}
                 >
                 </ListItem>
               ))}

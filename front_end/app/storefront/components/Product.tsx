@@ -34,8 +34,8 @@ export default function Product({ product }: ProductProps) {
     return (
         <div onClick={handleClick} className="cursor-pointer">
             <Image className='rounded-md aspect-square' src={product.image} alt="product" width={500} height={500} />
-            <div className="flex text-xl font-bold pt-2 pb-1">{product.name}</div>
-            <div className="flex text-md pt-1 pb-2">${product.price}</div>
+            <div className="flex text-md pt-2 pb-1">{product.name}</div>
+            <div className="flex text-sm pb-2">${product.price}</div>
         </div>
     )
 }

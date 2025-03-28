@@ -35,7 +35,7 @@ export function CarouselWide() {
                 style={{ backgroundImage: "url('/images/carousel1.jpg')" }}
               >
                 <div className="text-left absolute top-1/4 pl-40">
-                  <div className="text-5xl pb-3">New Arrivals</div>
+                  <div className="text-base md:text-3xl lg:text-5xl pb-3">New Arrivals</div>
                   <div className="text-md pb-3">Explore latest arrivals to elevate your style.</div>
                   <Button>Shop now &rarr;</Button>
                 </div>

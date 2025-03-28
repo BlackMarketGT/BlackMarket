@@ -22,6 +22,41 @@
         "description": "High-quality leather jacket for a sleek look.",
         "price": 40.00,
         "image": "/images/cargopants.jpg"
+      },
+      {
+        "id": "20",
+        "name": "Leather Jacket",
+        "description": "High-quality leather jacket for a sleek look.",
+        "price": 120.00,
+        "image": "/images/black_hoodie.jpeg"
+      },      
+      {
+        "id": "21",
+        "name": "Leather Jacket",
+        "description": "High-quality leather jacket for a sleek look.",
+        "price": 120.00,
+        "image": "/images/black_hoodie.jpeg"
+      },      
+      {
+        "id": "22",
+        "name": "Leather Jacket",
+        "description": "High-quality leather jacket for a sleek look.",
+        "price": 120.00,
+        "image": "/images/black_hoodie.jpeg"
+      },      
+      {
+        "id": "23",
+        "name": "Leather Jacket",
+        "description": "High-quality leather jacket for a sleek look.",
+        "price": 120.00,
+        "image": "/images/black_hoodie.jpeg"
+      },
+      {
+        "id": "24",
+        "name": "Leather Jacket",
+        "description": "High-quality leather jacket for a sleek look.",
+        "price": 120.00,
+        "image": "/images/black_hoodie.jpeg"
       }
     ],
     "trending": [
@@ -111,6 +146,27 @@
       },
       {
         "id": "5",
+        "name": "Stylish Sun Hat",
+        "description": "Keep cool and stylish this summer with our trendy sun hat.",
+        "price": 30.00,
+        "image": "/images/black_hoodie.jpeg"
+      },
+      {
+        "id": "12",
+        "name": "Stylish Sun Hat",
+        "description": "Keep cool and stylish this summer with our trendy sun hat.",
+        "price": 30.00,
+        "image": "/images/black_hoodie.jpeg"
+      },
+      {
+        "id": "13",
+        "name": "Stylish Sun Hat",
+        "description": "Keep cool and stylish this summer with our trendy sun hat.",
+        "price": 30.00,
+        "image": "/images/black_hoodie.jpeg"
+      },
+      {
+        "id": "14",
         "name": "Stylish Sun Hat",
         "description": "Keep cool and stylish this summer with our trendy sun hat.",
         "price": 30.00,
