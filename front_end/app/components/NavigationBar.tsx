@@ -94,6 +94,13 @@ export function NavigationBar() {
           </Link>
         </NavigationMenuItem>
       </NavigationMenuList>
+      <NavigationMenuItem>
+          <Link href="/cart" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+             Cart
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
     </NavigationMenu>
   );
 }
