@@ -1,9 +1,6 @@
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import {AddressForm, PasswordForm, PersonalInfoForm } from "./forms"
 import { NavigationBar } from "../components/NavigationBar"
-import { auth } from "../firebase/config"
-import { useAuthState } from "react-firebase-hooks/auth"
-import { useRouter } from "next/navigation"
 const AccountPage = () => {
   return (
     <>

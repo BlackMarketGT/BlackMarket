@@ -16,8 +16,6 @@ import {
 
 // import { Select } from  "@/components/ui/select";
 import { Eye, EyeOff, Mail} from "lucide-react"
-import { get, push, ref, set } from "firebase/database";
-
 import { useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { auth } from "@/app/firebase/config";
 
@@ -27,9 +25,8 @@ import {useRouter} from 'next/navigation';
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  // const [showPassword, setShowPassword] = useState(false);
   const [visible, setVisible] = useState(false)
-  const [error, setError] = useState<string | null>(null);
   const [newUser, setNewUser] = useState(false);
  
   const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
@@ -44,7 +41,7 @@ const LoginPage = () => {
         console.log("User created successfully");
         setEmail('');
         setPassword('');
-        sessionStorage.setItem('user', 'true');
+        window.localStorage.setItem('user', 'true');
         router.push('/');
       } catch (error) {
         console.error(error);
@@ -55,7 +52,7 @@ const LoginPage = () => {
         console.log("User signed in successfully");
         setEmail('');
         setPassword('');
-        sessionStorage.setItem('user', 'true');
+        window.localStorage.setItem('user', 'true');
         router.push('/');
 
       } catch (error) {

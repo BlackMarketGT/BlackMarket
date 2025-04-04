@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import "./styles/dashboard.css";
+import AuthProvider from "../firebase/authProvider";
 
 interface LayoutProps{
     children: React.ReactNode;
@@ -10,7 +11,7 @@ interface LayoutProps{
 const DashboardLayout: React.FC<LayoutProps> = ({children}) => {
 
     return (
-        
+        <AuthProvider>
         <div className = "dashboard-container">
             
             
@@ -23,6 +24,7 @@ const DashboardLayout: React.FC<LayoutProps> = ({children}) => {
                     {children}</main>
             </div>
         </div>
+        </AuthProvider>
     );
 };
 

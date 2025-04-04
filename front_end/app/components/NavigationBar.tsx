@@ -15,8 +15,6 @@ import {
 } from "@/components/ui/navigation-menu";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase/config";
-import { Button } from "@/components/ui/button";
-
 {/* function to adjust image based on system theme */}
 const getSystemTheme = (): 'light' | 'dark' => {
   if (typeof window === 'undefined') return 'dark';
@@ -63,8 +61,8 @@ const about: { title: string; description: string; href: string }[] = [
 
 
 export function NavigationBar() {
-  const userSession = sessionStorage.getItem('user');
   const [user] = useAuthState(auth);
+  const userSession = typeof window !== 'undefined' ? window.localStorage.getItem('user') : null;
   return (
     <NavigationMenu>
       <NavigationMenuList className="space-x-10">
@@ -106,7 +104,7 @@ export function NavigationBar() {
                   View Your Dashboard
                 </ListItem>
                 <ListItem title="Sign Out" href="/login" className="text-red-500" onClick={() => {
-                  sessionStorage.removeItem('user');
+                  window.localStorage.removeItem('user');
                   auth.signOut();
                 }}>
                   Sign Out of BlackMarket

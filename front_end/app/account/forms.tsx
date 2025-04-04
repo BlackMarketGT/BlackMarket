@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useState } from "react";
+import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -201,7 +201,6 @@ export function PersonalInfoForm() {
     router.push('/login');
   }
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [company, setCompany] = useState('');
 
