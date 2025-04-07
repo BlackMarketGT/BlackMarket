@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.inventory-container {
+  @apply bg-[#121212] text-white min-h-screen px-6 py-8;
+}
+
+.inventory-title {
+  @apply text-3xl font-bold mb-6 text-purple-300;
+}
+
+.inventory-button {
+  @apply bg-[#a06cd5] text-white px-4 py-2 rounded-lg mb-4 hover:bg-[#8b5fbf] transition-all;
+}
