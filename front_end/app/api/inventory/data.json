@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Laptop",
+    "quantity": 10,
+    "price": 999.99
+  },
+  {
+    "id": 2,
+    "name": "Headphones",
+    "quantity": 5,
+    "price": 199.99
+  },
+  {
+    "name": "Phone",
+    "quantity": 9,
+    "price": 679,
+    "id": 3
+  },
+  {
+    "name": "Chilli Fries",
+    "quantity": 28,
+    "price": 1,
+    "id": 4
+  }
+]
