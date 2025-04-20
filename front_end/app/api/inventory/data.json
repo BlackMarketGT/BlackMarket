@@ -1,26 +1,44 @@
-[
-  {
-    "id": 1,
-    "name": "Laptop",
-    "quantity": 10,
-    "price": 999.99
-  },
-  {
-    "id": 2,
-    "name": "Headphones",
-    "quantity": 5,
-    "price": 199.99
-  },
-  {
-    "name": "Phone",
-    "quantity": 9,
-    "price": 679,
-    "id": 3
-  },
-  {
-    "name": "Chilli Fries",
-    "quantity": 28,
-    "price": 1,
-    "id": 4
-  }
-]
+{
+  "inventory": [
+    {
+      "id": 1,
+      "name": "Laptop",
+      "quantity": 10,
+      "price": 999.99
+    },
+    {
+      "id": 2,
+      "name": "Headphones",
+      "quantity": 5,
+      "price": 199.99
+    },
+    {
+      "id": 3,
+      "name": "Phone",
+      "quantity": 9,
+      "price": 679
+    },
+    {
+      "id": 4,
+      "name": "Chilli Fries",
+      "quantity": 28,
+      "price": 1
+    }
+  ],
+  "orders": [
+    {
+      "id": 101,
+      "item": "Laptop",
+      "quantity": 2,
+      "status": "Pending",
+      "date": "2025-03-27"
+    },
+    {
+      "id": 102,
+      "item": "Headphones",
+      "quantity": 1,
+      "status": "Shipped",
+      "date": "2025-03-26"
+    }
+  ]
+}

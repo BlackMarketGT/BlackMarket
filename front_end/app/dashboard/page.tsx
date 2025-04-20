@@ -1,73 +1,68 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import DashboardLayout from "./layout";
-import "./styles/dashboard.css";
-import Header from "./components/Header";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "@/components/ui/tabs";
+
 import StatsCard from "./components/StatsCard";
+import SalesChart from "./components/SalesChart";
 import ProgressBar from "./components/ProgressBar";
-import Charts from "./components/Charts";
+import InventoryTable from "../inventory/components/InventoryTable";
+import OrderList from "../inventory/components/OrderList";
+import AddItemForm from "../inventory/components/AddItemForm";
 
-
-interface DashboardData {
-  transactions: { value: string; change: string };
-  totalUsers: { value: string; change: string };
-  ordersPlaced: { value: string; change: string };
-  quarterSalesGoal: { progress: number; goal: number };
-  customerGrowth: { progress: number; goal: number };
-}
-
-const DashboardPage: React.FC = () => {
-  const [data, setData] = useState<DashboardData | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("/api/dashboard-data"); // API route for backend data
-        const json = await res.json();
-        setData(json);
-      } catch (error) {
-        console.error("Failed to fetch dashboard data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (!data) return <p className="text-white text-center mt-10">Loading...</p>;
-
+export default function DashboardPage() {
   return (
-    <DashboardLayout>
-      <div className="dashboard-content">
-        <Header />
-        <div className="dashboard-overview">
-          <div className="overview-text">
-            <p>This is where you will see important metrics and analytics.</p>
+    <div className="min-h-screen bg-[#121212] text-white p-6">
+      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
 
-            {/* Stats Overview */}
-            <div className="stats-container">
-              <StatsCard title="Transactions" value={data.transactions.value} change={data.transactions.change} />
-              <StatsCard title="Total Users" value={data.totalUsers.value} change={data.totalUsers.change} />
-              <StatsCard title="Orders Placed" value={data.ordersPlaced.value} change={data.ordersPlaced.change} />
-            </div>
+      <Tabs defaultValue="overview" className="w-full">
+        <TabsList className="bg-[#1e1e1e] mb-6 border border-[#a06cd5]">
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="inventory">Inventory</TabsTrigger>
+          <TabsTrigger value="orders">Orders</TabsTrigger>
+        </TabsList>
 
-            {/* Progress Bars */}
-            <div className="progress-container">
-              <ProgressBar title="Quarter Sales Goal" progress={data.quarterSalesGoal.progress} goal={data.quarterSalesGoal.goal} />
-              <ProgressBar title="Customer Growth" progress={data.customerGrowth.progress} goal={data.customerGrowth.goal} />
-            </div>
-            
+        {/* Overview Tab */}
+        <TabsContent value="overview">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <StatsCard title="Transactions" value="45,300" change="+2.87%" />
+            <StatsCard title="Total Users" value="89,500" change="+0.73%" />
+            <StatsCard title="Orders Placed" value="200,543" change="+1.90%" />
           </div>
 
-          {/* Charts Section */}
-          <div className="chart-section">
-            <Charts />
+          <div className="mb-6">
+            <ProgressBar title="Quarter Sales Goal" progress={70} goal={100} />
+            <ProgressBar title="Customer Growth" progress={55} goal={100} />
           </div>
 
-        </div>
-      </div>
-    </DashboardLayout>
+          <div className="mt-6">
+            <SalesChart />
+          </div>
+        </TabsContent>
+
+        {/* Inventory Tab */}
+        <TabsContent value="inventory">
+          <h2 className="text-2xl font-bold mb-4">Inventory</h2>
+
+          {/* Add Item Form */}
+          <div className="mb-6">
+            <AddItemForm />
+          </div>
+
+          {/* Inventory Table */}
+          <InventoryTable />
+        </TabsContent>
+
+        {/* Orders Tab */}
+        <TabsContent value="orders">
+          <h2 className="text-2xl font-bold mb-4">Orders</h2>
+          <OrderList />
+        </TabsContent>
+      </Tabs>
+    </div>
   );
-};
-
-export default DashboardPage;
+}

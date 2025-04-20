@@ -11,69 +11,94 @@ type InventoryItem = {
   status?: string;
 };
 
+type Order = {
+  id: number;
+  item: string;
+  quantity: number;
+  status: string;
+  date: string;
+};
+
+type Data = {
+  inventory: InventoryItem[];
+  orders: Order[];
+};
+
 const dataPath = path.join(process.cwd(), "app/api/inventory/data.json");
 
-function readInventory(): InventoryItem[] {
+function readInventory(): Data {
   try {
     const data = fs.readFileSync(dataPath, "utf-8");
     return JSON.parse(data);
   } catch {
-    return [];
+    return { inventory: [], orders: [] };
   }
 }
 
-function writeInventory(data: InventoryItem[]) {
+function writeInventory(data: Data) {
   fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
 }
 
 export async function GET() {
-  const inventory = readInventory();
-  return NextResponse.json(inventory);
+  const data = readInventory();
+  return NextResponse.json(data);
 }
 
 export async function POST(req: Request) {
   const body = await req.json();
-  const inventory = readInventory();
+  const data = readInventory();
 
-  if (body.update && body.id !== undefined) {
-    const item: InventoryItem | undefined = inventory.find(
-      (inv: InventoryItem) => inv.id === Number(body.id)
-    );
+  // 🔁 Handle inventory update
+  if (body.update && body.id !== undefined && body.type !== "order") {
+    const item = data.inventory.find((item) => item.id === Number(body.id));
     if (item) {
       item.quantity = body.quantity ?? item.quantity;
       item.price = body.price ?? item.price;
       item.status = body.status ?? item.status;
       item.category = body.category ?? item.category;
-      writeInventory(inventory);
+      writeInventory(data);
       return NextResponse.json(item);
-    } else {
-      return NextResponse.json({ error: "Item not found" }, { status: 404 });
     }
   }
 
-  const newItem: InventoryItem = {
-    id: inventory.length + 1,
-    name: body.name,
-    quantity: body.quantity,
-    price: body.price,
-    category: body.category,
-    status: body.status || "pending",
-  };
+  // 🔁 Handle order update
+  if (body.update && body.type === "order") {
+    const order = data.orders.find((order) => order.id === Number(body.id));
+    if (order) {
+      order.status = body.status ?? order.status;
+      writeInventory(data);
+      return NextResponse.json(order);
+    }
+  }
 
-  inventory.push(newItem);
-  writeInventory(inventory);
-  return NextResponse.json(newItem, { status: 201 });
+  // ➕ Add new inventory item
+  if (body.name && body.price !== undefined) {
+    const newItem: InventoryItem = {
+      id: data.inventory.length + 1,
+      name: body.name,
+      quantity: body.quantity,
+      price: body.price,
+      category: body.category,
+      status: body.status || "Available",
+    };
+    data.inventory.push(newItem);
+    writeInventory(data);
+    return NextResponse.json(newItem, { status: 201 });
+  }
+
+  return NextResponse.json({ error: "Invalid request" }, { status: 400 });
 }
 
 export async function DELETE(req: Request) {
   const body = await req.json();
-  const inventory = readInventory();
+  const data = readInventory();
 
-  const updated = inventory.filter((item) => item.id !== Number(body.id));
-  if (updated.length === inventory.length) {
+  const updatedInventory = data.inventory.filter((item) => item.id !== Number(body.id));
+  if (updatedInventory.length === data.inventory.length) {
     return NextResponse.json({ error: "Item not found" }, { status: 404 });
   }
 
-  writeInventory(updated);
+  data.inventory = updatedInventory;
+  writeInventory(data);
   return NextResponse.json({ success: true });
 }
